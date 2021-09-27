@@ -4,29 +4,32 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
-import StateHooksComponent from './StateHooksComponent';
+//import StateHooksComponent from './StateHooksComponent';
 import Player from './PlayerComponent';
+import AudioMetaDataForUser from './AudioMetaDataForUser';
+import DownloadAndPlay from './DownloadAndPlay';
 
 const link = createHttpLink({
-  uri: "http://localhost:8081/audio-storage/graphql",
+  uri: "http://localhost:8080/audio-storage/graphql",
+  //uri: "https://api.alpha.kidsloop.net/audio-storage/graphql",
   credentials: 'include',
 })
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
-  //uri: "http://localhost:4000/graphql"
-  //uri: "https://apollo-fullstack-tutorial.herokuapp.com/"
-  //uri: "http://localhost:8081/audio-storage/graphql"
-  //uri: "https://api.alpha.kidsloop.net/audio-server/graphql"
 });
 
-//<Player url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <StateHooksComponent />
+    <AudioMetaDataForUser />
   </ApolloProvider>,
   document.getElementById('root'),
 );
+//
+//<AudioMetaDataForUser />
+//<StateHooksComponent />
+//<Player url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+//<DownloadAndPlay audioId="54b140c0-7703-4a5d-b0c7-ea59a0c4b4eb" organizationId="org1" />
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
