@@ -1,7 +1,9 @@
 {
-  "name": "react-hooks-tutorial",
+  "name": "kidsloop-audio-service-player",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/lib.js",
+  "types": "dist/lib.d.ts",
   "dependencies": {
     "@apollo/client": "^3.4.10",
     "@babel/core": "^7.15.4",
@@ -24,7 +26,8 @@
     "start": "HOST=local.alpha.kidsloop.net HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "package": "rollup -c"
   },
   "eslintConfig": {
     "extends": [
@@ -44,5 +47,19 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://api.alpha.kidsloop.net/"
+  "proxy": "https://api.alpha.kidsloop.net/",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-image": "^2.1.1",
+    "rollup": "^2.57.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-dts": "^4.0.0",
+    "rollup-plugin-import-css": "^3.0.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-sass": "^1.2.8",
+    "rollup-plugin-styles": "^3.14.1",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.30.0"
+  }
 }
