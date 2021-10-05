@@ -63,6 +63,7 @@ const Player = ({ audioId, organizationId }: { audioId: string, organizationId: 
     variables: { audioId, organizationId },
   });
   const [audio, setAudio] = useState(new Audio());
+  const [audioSrc, setAudioSrc] = useState<string>();
   const [playing, toggle] = useAudio(audio);
   useEffect(() => {
     if (loading) return;
@@ -87,6 +88,7 @@ const Player = ({ audioId, organizationId }: { audioId: string, organizationId: 
       console.log("decryptedAudio")
       const audioUrl = URL.createObjectURL(new Blob([decryptedAudio], { type: "audio/webm" }))
       console.log("audioUrl", audioUrl)
+      setAudioSrc(audioUrl)
       setAudio(new Audio(audioUrl))
     }
     downloadAudio()
@@ -100,6 +102,9 @@ const Player = ({ audioId, organizationId }: { audioId: string, organizationId: 
   }
   return (
     <div>
+      qwerty
+      <audio src={audioSrc} controls={true}/>
+      asd
       <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
     </div>
   );

@@ -10,8 +10,9 @@ import AudioMetaDataForUser from './AudioMetaDataForUser';
 import DownloadAndPlay from './DownloadAndPlay';
 
 const link = createHttpLink({
-  uri: "http://localhost:8080/audio-storage/graphql",
-  //uri: "https://api.alpha.kidsloop.net/audio-storage/graphql",
+  // uri: "http://localhost:8080/audio-storage/graphql",
+  // uri: "https://api.alpha.kidsloop.net/audio-storage/graphql",
+  uri: "/audio-storage/graphql",
   credentials: 'include',
 })
 const client = new ApolloClient({
@@ -22,6 +23,8 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <AudioMetaDataForUser />
+    <Player url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+    <DownloadAndPlay audioId="54b140c0-7703-4a5d-b0c7-ea59a0c4b4eb" organizationId="org1" />
   </ApolloProvider>,
   document.getElementById('root'),
 );
