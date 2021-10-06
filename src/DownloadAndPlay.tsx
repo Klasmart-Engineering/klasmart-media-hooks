@@ -73,23 +73,28 @@ const Player = ({ audioId, organizationId }: { audioId: string, organizationId: 
     }
     const presignedUrl = data.getRequiredDownloadInfo.presignedUrl
     const downloadAudio = async () => {
-      const response = await fetch(presignedUrl, {
-        method: 'GET',
-        credentials: 'include',
-      })
-      console.log("response", response.status)
-      const base64SymmetricKey = data.getRequiredDownloadInfo.base64SymmetricKey
-      console.log("base64SymmetricKey", base64SymmetricKey)
-      const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
-      console.log("symmetricKey")
-      const base64EncryptedAudio = await response.text()
-      console.log("base64EncryptedAudio")
-      const decryptedAudio = decrypt(symmetricKey, base64EncryptedAudio)
-      console.log("decryptedAudio")
-      const audioUrl = URL.createObjectURL(new Blob([decryptedAudio], { type: "audio/webm" }))
-      console.log("audioUrl", audioUrl)
-      setAudioSrc(audioUrl)
-      setAudio(new Audio(audioUrl))
+      try {
+        const response = await fetch(presignedUrl, {
+          method: 'GET',
+          credentials: 'include',
+        })
+        console.log("response", response.status)
+        const base64SymmetricKey = data.getRequiredDownloadInfo.base64SymmetricKey
+        console.log("base64SymmetricKey", base64SymmetricKey)
+        const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
+        console.log("symmetricKey")
+        const base64EncryptedAudio = await response.text()
+        console.log("base64EncryptedAudio")
+        const decryptedAudio = decrypt(symmetricKey, base64EncryptedAudio)
+        console.log("decryptedAudio")
+        const blob = new Blob([decryptedAudio], { type: "audio/webm" })
+        const audioUrl = URL.createObjectURL(blob)
+        console.log("audioUrl", audioUrl)
+        setAudioSrc(audioUrl)
+        setAudio(new Audio(audioUrl))
+      } catch(e) {
+        console.error(e)
+      }
     }
     downloadAudio()
     },
@@ -102,9 +107,7 @@ const Player = ({ audioId, organizationId }: { audioId: string, organizationId: 
   }
   return (
     <div>
-      qwerty
-      <audio src={audioSrc} controls={true}/>
-      asd
+      <audio src={audioSrc} controls controlsList="nodownload"/>
       <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
     </div>
   );
