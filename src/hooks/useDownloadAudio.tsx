@@ -1,8 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
 import { box } from "tweetnacl";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import { useDownloadAudio } from "./hooks";
+// const GET_REQUIRED_DOWNLOAD_INFO__WITH_ROOM_ID = gql`
+//   query getRequiredDownloadInfo($audioId: String!, $roomId: String!) {
+//     getRequiredDownloadInfo(audioId: $audioId, roomId: $roomId) {
+//       base64SymmetricKey
+//       presignedUrl
+//     }
+//   }
+// `;
 
 const GET_REQUIRED_DOWNLOAD_INFO = gql`
   query getRequiredDownloadInfo($audioId: String!, $organizationId: String!) {
@@ -36,74 +43,36 @@ export const decrypt = (
   return decrypted;
 };
 
-const useAudio: (audio: HTMLAudioElement) => [boolean, () => void] = (
-  audio: HTMLAudioElement
-) => {
-  const [playing, setPlaying] = useState(false);
+interface AudioPlayerHookInput {
+  audioId: string;
+  roomId?: string;
+  organizationId?: string;
+}
 
-  const toggle = () => setPlaying(!playing);
+interface AudioPlayerHookOutput {
+  audioSrc?: string;
+  htmlAudioElement?: HTMLAudioElement;
+  loading?: boolean;
+  error?: string;
+}
 
-  useEffect(() => {
-    playing ? audio.play() : audio.pause();
-  }, [audio, playing]);
-
-  useEffect(() => {
-    audio.addEventListener("ended", () => setPlaying(false));
-    return () => {
-      audio.removeEventListener("ended", () => setPlaying(false));
-    };
-  });
-
-  return [playing, toggle];
-};
-
-export const PlayerWithHook = ({
+// TODO: replace organization with roomId
+export const useDownloadAudio = ({
   audioId,
   roomId,
   organizationId,
-}: {
-  audioId: string;
-  roomId: string;
-  organizationId: string;
-}) => {
-  const { loading, error, audioSrc } = useDownloadAudio({
-    audioId,
-    roomId,
-    organizationId,
+}: AudioPlayerHookInput): AudioPlayerHookOutput => {
+  const [response, setReponse] = useState<AudioPlayerHookOutput>({
+    loading: true,
   });
 
-  if (loading) return <p>Loading ...</p>;
-  if (error) {
-    return <p>error: {JSON.stringify(error, null, 2)}</p>;
-  }
-  return (
-    <div>
-      <audio src={audioSrc} controls controlsList="nodownload" />
-    </div>
-  );
-};
-
-const Player = ({
-  audioId,
-  organizationId,
-}: {
-  audioId: string;
-  organizationId: string;
-}) => {
+  // TODO: replace query with GET_REQUIRED_DOWNLOAD_INFO__WITH_ROOM_ID that uses roomID
   const { loading, error, data } = useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
     variables: { audioId, organizationId },
   });
-  const [audio, setAudio] = useState(new Audio());
-  const [audioSrc, setAudioSrc] = useState<string>();
-  const [playing, toggle] = useAudio(audio);
+
   useEffect(() => {
-    if (loading) return;
-    if (error) {
-      console.log(error);
-      return;
-    }
-    const presignedUrl = data.getRequiredDownloadInfo.presignedUrl;
-    const downloadAudio = async () => {
+    const downloadAudio = async (presignedUrl: string) => {
       try {
         const response = await fetch(presignedUrl, {
           method: "GET",
@@ -122,25 +91,28 @@ const Player = ({
         const blob = new Blob([decryptedAudio], { type: "audio/webm" });
         const audioUrl = URL.createObjectURL(blob);
         console.log("audioUrl", audioUrl);
-        setAudioSrc(audioUrl);
-        setAudio(new Audio(audioUrl));
+        setReponse({ loading: false, audioSrc: audioUrl });
       } catch (e) {
         console.error(e);
+        setReponse({ loading: false, error: e as string });
       }
     };
-    downloadAudio();
-  }, [loading, error, data]);
 
-  if (loading) return <p>Loading ...</p>;
-  if (error) {
-    return <p>error: {JSON.stringify(error, null, 2)}</p>;
+    if (
+      loading === false &&
+      error === undefined &&
+      data?.getRequiredDownloadInfo?.presignedUrl !== undefined
+    ) {
+      downloadAudio(data.getRequiredDownloadInfo.presignedUrl);
+    }
+  }, [data, loading, error]);
+
+  if (loading) {
+    return { loading: true };
   }
-  return (
-    <div>
-      <audio src={audioSrc} controls controlsList="nodownload" />
-      <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
-    </div>
-  );
-};
+  if (error) {
+    return { loading: false, error: error.message };
+  }
 
-export default Player;
+  return response;
+};

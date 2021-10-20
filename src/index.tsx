@@ -35,7 +35,7 @@ ReactDOM.render(
       audioId="54b140c0-7703-4a5d-b0c7-ea59a0c4b4eb"
       organizationId="org1"
     />
-    Player With Hoo
+    Player With Hook
     <PlayerWithHook
       audioId="54b140c0-7703-4a5d-b0c7-ea59a0c4b4eb"
       organizationId="org1"
