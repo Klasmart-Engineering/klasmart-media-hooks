@@ -1,10 +1,9 @@
 import styles from 'rollup-plugin-styles';
 import image from '@rollup/plugin-image';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import builtins from 'rollup-plugin-node-builtins';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from 'rollup-plugin-babel';
-import dts from 'rollup-plugin-dts';
 import pkg from './package.json'
 
 const rollupConfig = {
@@ -19,6 +18,7 @@ const rollupConfig = {
         }
     ],
     plugins: [
+        typescript({ tsconfig: './tsconfig.json' }),
         image(),
         babel({
             exclude: 'node_modules/**',
@@ -28,8 +28,6 @@ const rollupConfig = {
         styles(),
         builtins(),
         commonjs(),
-        typescript(),
-        dts(),
     ],
     external: ['react', 'react-dom']
 };

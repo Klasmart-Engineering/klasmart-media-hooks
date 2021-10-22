@@ -20,17 +20,6 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-
 function __awaiter(thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -74,88 +63,107 @@ function __makeTemplateObject(cooked, raw) {
     return cooked;
 }
 
-var GET_REQUIRED_DOWNLOAD_INFO = client.gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\nquery getRequiredDownloadInfo(\n    $audioId: String!\n    $organizationId: String!,) {\n  getRequiredDownloadInfo(\n    audioId: $audioId,\n    organizationId: $organizationId,\n  ) {\n    base64SymmetricKey\n    presignedUrl\n  }\n}\n"], ["\nquery getRequiredDownloadInfo(\n    $audioId: String!\n    $organizationId: String!,) {\n  getRequiredDownloadInfo(\n    audioId: $audioId,\n    organizationId: $organizationId,\n  ) {\n    base64SymmetricKey\n    presignedUrl\n  }\n}\n"])));
+// const GET_REQUIRED_DOWNLOAD_INFO__WITH_ROOM_ID = gql`
+//   query getRequiredDownloadInfo($audioId: String!, $roomId: String!) {
+//     getRequiredDownloadInfo(audioId: $audioId, roomId: $roomId) {
+//       base64SymmetricKey
+//       presignedUrl
+//     }
+//   }
+// `;
+var GET_REQUIRED_DOWNLOAD_INFO = client.gql(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  query getRequiredDownloadInfo($audioId: String!, $organizationId: String!) {\n    getRequiredDownloadInfo(\n      audioId: $audioId\n      organizationId: $organizationId\n    ) {\n      base64SymmetricKey\n      presignedUrl\n    }\n  }\n"], ["\n  query getRequiredDownloadInfo($audioId: String!, $organizationId: String!) {\n    getRequiredDownloadInfo(\n      audioId: $audioId\n      organizationId: $organizationId\n    ) {\n      base64SymmetricKey\n      presignedUrl\n    }\n  }\n"])));
 var decrypt = function (secretOrSharedKey, messageWithNonce) {
-    var messageWithNonceAsUint8Array = Buffer.from(messageWithNonce, 'base64');
+    var messageWithNonceAsUint8Array = Buffer.from(messageWithNonce, "base64");
     var nonce = messageWithNonceAsUint8Array.slice(0, tweetnacl.box.nonceLength);
     var message = messageWithNonceAsUint8Array.slice(tweetnacl.box.nonceLength, messageWithNonce.length);
     var decrypted = tweetnacl.box.open.after(message, nonce, secretOrSharedKey);
     if (!decrypted) {
-        throw new Error('Could not decrypt message');
+        throw new Error("Could not decrypt message");
     }
     return decrypted;
 };
-var useAudio = function (audio) {
-    var _a = react.useState(false), playing = _a[0], setPlaying = _a[1];
-    var toggle = function () { return setPlaying(!playing); };
-    react.useEffect(function () {
-        playing ? audio.play() : audio.pause();
-    }, [audio, playing]);
-    react.useEffect(function () {
-        audio.addEventListener('ended', function () { return setPlaying(false); });
-        return function () {
-            audio.removeEventListener('ended', function () { return setPlaying(false); });
-        };
-    });
-    return [playing, toggle];
-};
-var Player = function (_a) {
-    var audioId = _a.audioId, organizationId = _a.organizationId;
-    var _b = client.useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
+// TODO: replace organization with roomId
+var useDownloadAudio = function (_a) {
+    var audioId = _a.audioId; _a.roomId; var organizationId = _a.organizationId;
+    var _b = react.useState({
+        loading: true,
+    }), response = _b[0], setReponse = _b[1];
+    // TODO: replace query with GET_REQUIRED_DOWNLOAD_INFO__WITH_ROOM_ID that uses roomID
+    var _c = client.useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
         variables: { audioId: audioId, organizationId: organizationId },
-    }), loading = _b.loading, error = _b.error, data = _b.data;
-    var _c = react.useState(new Audio()), audio = _c[0], setAudio = _c[1];
-    var _d = useAudio(audio), playing = _d[0], toggle = _d[1];
+    }), loading = _c.loading, error = _c.error, data = _c.data;
     react.useEffect(function () {
-        if (loading)
-            return;
-        if (error) {
-            console.log(error);
-            return;
-        }
-        var presignedUrl = data.getRequiredDownloadInfo.presignedUrl;
-        var downloadAudio = function () { return __awaiter(void 0, void 0, void 0, function () {
-            var response, base64SymmetricKey, symmetricKey, base64EncryptedAudio, decryptedAudio, audioUrl;
+        var _a;
+        var downloadAudio = function (presignedUrl) { return __awaiter(void 0, void 0, void 0, function () {
+            var response_1, base64SymmetricKey, symmetricKey, base64EncryptedAudio, decryptedAudio, blob, audioUrl, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(presignedUrl, {
-                            method: 'GET',
-                            credentials: 'include',
-                        })];
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, fetch(presignedUrl, {
+                                method: "GET",
+                                credentials: "include",
+                            })];
                     case 1:
-                        response = _a.sent();
-                        console.log("response", response.status);
+                        response_1 = _a.sent();
+                        console.log("response", response_1.status);
                         base64SymmetricKey = data.getRequiredDownloadInfo.base64SymmetricKey;
                         console.log("base64SymmetricKey", base64SymmetricKey);
-                        symmetricKey = Buffer.from(base64SymmetricKey, 'base64');
+                        symmetricKey = Buffer.from(base64SymmetricKey, "base64");
                         console.log("symmetricKey");
-                        return [4 /*yield*/, response.text()];
+                        return [4 /*yield*/, response_1.text()];
                     case 2:
                         base64EncryptedAudio = _a.sent();
                         console.log("base64EncryptedAudio");
                         decryptedAudio = decrypt(symmetricKey, base64EncryptedAudio);
                         console.log("decryptedAudio");
-                        audioUrl = URL.createObjectURL(new Blob([decryptedAudio], { type: "audio/webm" }));
+                        blob = new Blob([decryptedAudio], { type: "audio/webm" });
+                        audioUrl = URL.createObjectURL(blob);
                         console.log("audioUrl", audioUrl);
-                        setAudio(new Audio(audioUrl));
-                        return [2 /*return*/];
+                        setReponse({ loading: false, audioSrc: audioUrl });
+                        return [3 /*break*/, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        console.error(e_1);
+                        setReponse({ loading: false, error: e_1 });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         }); };
-        downloadAudio();
-    }, [loading, error, data]);
+        if (loading === false &&
+            error === undefined &&
+            ((_a = data === null || data === void 0 ? void 0 : data.getRequiredDownloadInfo) === null || _a === void 0 ? void 0 : _a.presignedUrl) !== undefined) {
+            downloadAudio(data.getRequiredDownloadInfo.presignedUrl);
+        }
+    }, [data, loading, error]);
+    if (loading) {
+        return { loading: true };
+    }
+    if (error) {
+        return { loading: false, error: error.message };
+    }
+    return response;
+};
+var templateObject_1$1;
+
+client.gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  query getRequiredDownloadInfo($audioId: String!, $organizationId: String!) {\n    getRequiredDownloadInfo(\n      audioId: $audioId\n      organizationId: $organizationId\n    ) {\n      base64SymmetricKey\n      presignedUrl\n    }\n  }\n"], ["\n  query getRequiredDownloadInfo($audioId: String!, $organizationId: String!) {\n    getRequiredDownloadInfo(\n      audioId: $audioId\n      organizationId: $organizationId\n    ) {\n      base64SymmetricKey\n      presignedUrl\n    }\n  }\n"])));
+var PlayerWithHook = function (_a) {
+    var audioId = _a.audioId, roomId = _a.roomId, organizationId = _a.organizationId;
+    var _b = useDownloadAudio({
+        audioId: audioId,
+        roomId: roomId,
+        organizationId: organizationId,
+    }), loading = _b.loading, error = _b.error, audioSrc = _b.audioSrc;
     if (loading)
         return jsxRuntime.jsx("p", { children: "Loading ..." }, void 0);
     if (error) {
         return jsxRuntime.jsxs("p", { children: ["error: ", JSON.stringify(error, null, 2)] }, void 0);
     }
-    return (jsxRuntime.jsx("div", { children: jsxRuntime.jsx("button", __assign({ onClick: toggle }, { children: playing ? "Pause" : "Play" }), void 0) }, void 0));
+    return (jsxRuntime.jsx("div", { children: jsxRuntime.jsx("audio", { src: audioSrc, controls: true, controlsList: "nodownload" }, void 0) }, void 0));
 };
 var templateObject_1;
 
-var KidsLoopAudioServicePlayer = {
-    Player: Player
-};
-
-exports["default"] = KidsLoopAudioServicePlayer;
+exports.Player = PlayerWithHook;
+exports.useDownloadAudio = useDownloadAudio;
 //# sourceMappingURL=lib.js.map
