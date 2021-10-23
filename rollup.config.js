@@ -1,35 +1,42 @@
-import styles from 'rollup-plugin-styles';
-import image from '@rollup/plugin-image';
-import typescript from '@rollup/plugin-typescript';
-import builtins from 'rollup-plugin-node-builtins';
+import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import pkg from './package.json'
+import typescript from '@rollup/plugin-typescript';
+import { terser } from 'rollup-plugin-terser';
+import external from 'rollup-plugin-peer-deps-external';
+import dts from 'rollup-plugin-dts';
 
-const rollupConfig = {
-    input: 'src/lib.ts',
-    output: [
-        {
-            file: pkg.main,
-            format: 'cjs',
-            exports: 'named',
-            sourcemap: true,
-            strict: false
-        }
-    ],
-    plugins: [
-        typescript({ tsconfig: './tsconfig.json' }),
-        image(),
-        babel({
-            exclude: 'node_modules/**',
-            presets: ['@babel/env', '@babel/preset-react'],
-            extensions: ['.js', '.svg'],
-        }),
-        styles(),
-        builtins(),
-        commonjs(),
-    ],
-    external: ['react', 'react-dom']
-};
+import packageJson from './package.json'
+
+const rollupConfig = [
+    {
+        input: 'src/index.ts',
+        output: [
+            {
+                file: packageJson.main,
+                format: 'cjs',
+                sourcemap: true,
+                name: 'react-ts-lib'
+            },
+            {
+                file: packageJson.module,
+                format: 'esm',
+                sourcemap: true
+            }
+        ],
+        plugins: [
+            typescript({ tsconfig: './tsconfig.json' }),
+            external(),
+            resolve(),
+            terser(),
+            commonjs(),
+        ],
+    },
+    {
+        input: 'dist/esm/types/index.d.ts',
+        output: [{ file: 'dist/index.d.ts', format: "esm" }],
+        external: [/\.css$/],
+        plugins: [dts()],
+    },
+]
 
 export default rollupConfig;

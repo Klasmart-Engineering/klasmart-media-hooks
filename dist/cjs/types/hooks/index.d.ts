@@ -1,2 +1,2 @@
 export { useDownloadAudio } from "./useDownloadAudio";
-export { useAudioMetadata } from "./useAudioMetadata"
+export { useAudioMetadata } from "./useAudioMetadata";
