@@ -27,9 +27,10 @@ export const useAudioMetadata = ({
   interface AudioMetadataItem {
     id: string;
     userId: string;
-    roomId: string;
+    roomId?: string;
     h5pId: string;
     h5pSubId?: string;
+    description: string
     creationDate: string | any;
   }
   
@@ -57,6 +58,7 @@ export const useAudioMetadata = ({
       roomId
       h5pId
       h5pSubId
+      description
       creationDate
     }
   }

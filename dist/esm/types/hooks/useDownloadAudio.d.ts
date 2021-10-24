@@ -1,8 +1,7 @@
-export declare const decrypt: (secretOrSharedKey: Uint8Array, messageWithNonce: string) => Uint8Array;
-interface AudioPlayerHookInput {
+export declare const useDownloadAudio: ({ audioId, mimeType, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
+export interface AudioPlayerHookInput {
     audioId: string;
-    roomId?: string;
-    organizationId?: string;
+    mimeType: string;
 }
 interface AudioPlayerHookOutput {
     audioSrc?: string;
@@ -10,5 +9,5 @@ interface AudioPlayerHookOutput {
     loading?: boolean;
     error?: string;
 }
-export declare const useDownloadAudio: ({ audioId, roomId, organizationId, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
+export declare const decrypt: (secretOrSharedKey: Uint8Array, messageWithNonce: Uint8Array) => Uint8Array;
 export {};

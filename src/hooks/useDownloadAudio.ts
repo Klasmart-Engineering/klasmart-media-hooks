@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export const useDownloadAudio = ({
   audioId,
+  mimeType,
 }: AudioPlayerHookInput): AudioPlayerHookOutput => {
   const [response, setReponse] = useState<AudioPlayerHookOutput>({
     loading: true,
@@ -26,17 +27,18 @@ export const useDownloadAudio = ({
         console.log("base64SymmetricKey", base64SymmetricKey);
         const symmetricKey = Buffer.from(base64SymmetricKey, "base64");
         console.log("symmetricKey");
-        const base64EncryptedAudio = await response.text();
-        console.log("base64EncryptedAudio");
-        const decryptedAudio = decrypt(symmetricKey, base64EncryptedAudio);
+        const encryptedAudioArrayBuffer = await response.arrayBuffer()
+        const encryptedAudio = new Uint8Array(encryptedAudioArrayBuffer)
+        console.log("encryptedAudio");
+        const decryptedAudio = decrypt(symmetricKey, encryptedAudio);
         console.log("decryptedAudio");
-        const blob = new Blob([decryptedAudio], { type: "audio/webm" });
+        const blob = new Blob([decryptedAudio], { type: mimeType });
         const audioUrl = URL.createObjectURL(blob);
         console.log("audioUrl", audioUrl);
         setReponse({ loading: false, audioSrc: audioUrl });
       } catch (e) {
         console.error(e);
-        setReponse({ loading: false, error: e as string });
+        setReponse({ loading: false, error: JSON.stringify(e) });
       }
     };
 
@@ -61,6 +63,7 @@ export const useDownloadAudio = ({
 
 export interface AudioPlayerHookInput {
   audioId: string;
+  mimeType: string;
 }
 
 interface AudioPlayerHookOutput {
@@ -83,11 +86,10 @@ const GET_REQUIRED_DOWNLOAD_INFO = gql`
 
 export const decrypt = (
   secretOrSharedKey: Uint8Array,
-  messageWithNonce: string
+  messageWithNonce: Uint8Array
 ): Uint8Array => {
-  const messageWithNonceAsUint8Array = Buffer.from(messageWithNonce, "base64");
-  const nonce = messageWithNonceAsUint8Array.slice(0, box.nonceLength);
-  const message = messageWithNonceAsUint8Array.slice(
+  const nonce = messageWithNonce.slice(0, box.nonceLength);
+  const message = messageWithNonce.slice(
     box.nonceLength,
     messageWithNonce.length
   );
