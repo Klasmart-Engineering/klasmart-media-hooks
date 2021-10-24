@@ -1,19 +1,11 @@
 import React from "react";
-import { useDownloadAudio } from "../../hooks";
+import { AudioPlayerHookInput, useDownloadAudio } from "../../hooks/useDownloadAudio";
 
 export const PlayerWithHook = ({
   audioId,
-  roomId,
-  organizationId,
-}: {
-  audioId: string;
-  roomId: string;
-  organizationId: string;
-}) => {
+}: AudioPlayerHookInput) => {
   const { loading, error, audioSrc } = useDownloadAudio({
     audioId,
-    roomId,
-    organizationId,
   });
 
   if (loading) return <p>Loading ...</p>;

@@ -1,8 +1,6 @@
 import React from "react";
 import { AudioMetadataHookInput, useAudioMetadata } from "../../hooks/useAudioMetadata";
 
-// Usage:
-// <AudioMetaDataWithHook userId="" roomId="" h5pId="" h5pSubId="" />
 export const AudioMetaDataWithHook = ({
   userId,
   roomId,
