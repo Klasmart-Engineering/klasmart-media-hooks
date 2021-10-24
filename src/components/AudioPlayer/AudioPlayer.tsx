@@ -1,7 +1,7 @@
 import React from "react";
 import { AudioPlayerHookInput, useDownloadAudio } from "../../hooks/useDownloadAudio";
 
-export const PlayerWithHook = ({
+export const AudioPlayer = ({
   audioId,
 }: AudioPlayerHookInput) => {
   const { loading, error, audioSrc } = useDownloadAudio({
@@ -19,4 +19,4 @@ export const PlayerWithHook = ({
   );
 };
 
-export default PlayerWithHook;
+export default AudioPlayer;

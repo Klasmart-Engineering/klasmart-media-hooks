@@ -1,2 +1,2 @@
-export { default as DownloadAudio } from './DownloadAudio'
-export { default as GetAudioMetadata } from './GetAudioMetadata'
+export { default as AudioPlayer } from './AudioPlayer'
+export { default as AudioMetadataList } from './AudioMetadataList'
