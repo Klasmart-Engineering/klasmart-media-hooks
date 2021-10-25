@@ -12,6 +12,7 @@ interface AudioMetadataItem {
     h5pId: string;
     h5pSubId?: string;
     description: string;
+    mimeType: string;
     creationDate: string | any;
 }
 interface AudioMetadataHookOutput {

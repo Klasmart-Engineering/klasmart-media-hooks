@@ -31,6 +31,7 @@ interface AudioMetadataItem {
   h5pId: string;
   h5pSubId?: string;
   description: string;
+  mimeType: string;
   creationDate: string | any;
 }
 
@@ -59,6 +60,7 @@ const GET_AUDIO_METADATA = gql`
       h5pId
       h5pSubId
       description
+      mimeType
       creationDate
     }
   }
