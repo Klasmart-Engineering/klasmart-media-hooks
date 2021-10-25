@@ -27,8 +27,8 @@ export const useDownloadAudio = ({
         console.log("base64SymmetricKey", base64SymmetricKey);
         const symmetricKey = Buffer.from(base64SymmetricKey, "base64");
         console.log("symmetricKey");
-        const encryptedAudioArrayBuffer = await response.arrayBuffer()
-        const encryptedAudio = new Uint8Array(encryptedAudioArrayBuffer)
+        const encryptedAudioArrayBuffer = await response.arrayBuffer();
+        const encryptedAudio = new Uint8Array(encryptedAudioArrayBuffer);
         console.log("encryptedAudio");
         const decryptedAudio = decrypt(symmetricKey, encryptedAudio);
         console.log("decryptedAudio");
@@ -66,7 +66,7 @@ export interface AudioPlayerHookInput {
   mimeType: string;
 }
 
-interface AudioPlayerHookOutput {
+export interface AudioPlayerHookOutput {
   audioSrc?: string;
   htmlAudioElement?: HTMLAudioElement;
   loading?: boolean;
@@ -75,9 +75,7 @@ interface AudioPlayerHookOutput {
 
 const GET_REQUIRED_DOWNLOAD_INFO = gql`
   query getRequiredDownloadInfo($audioId: String!) {
-    getRequiredDownloadInfo(
-      audioId: $audioId
-    ) {
+    getRequiredDownloadInfo(audioId: $audioId) {
       base64SymmetricKey
       presignedUrl
     }
