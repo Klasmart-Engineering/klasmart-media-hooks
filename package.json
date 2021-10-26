@@ -11,8 +11,8 @@
     "package": "rimraf dist && rollup -c",
     "release": "standard-version",
     "prepare": "husky install",
-    "format:check": "prettier --check \"{src,tests}/**/*.ts\" \"*.json\"",
-    "format": "prettier --write \"{src,tests}/**/*.ts\" \"*.json\"",
+    "format:check": "prettier --check \"{src,tests}/**/*.{ts,tsx}\" \"*.json\"",
+    "format": "prettier --write \"{src,tests}/**/*.{ts,tsx}\" \"*.json\"",
     "pre-commit": "lint-staged"
   },
   "config": {
@@ -53,6 +53,7 @@
     "react": "^17.0.2"
   },
   "lint-staged": {
-    "*.json": "prettier --write"
+    "*.json": "prettier --write",
+    "{src,tests}/**/*.{ts,tsx}": "prettier --write"
   }
 }

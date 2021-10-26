@@ -7,7 +7,6 @@ export interface AudioPlayerHookInput {
   mimeType: string
 }
 
-
 export interface AudioPlayerHookOutput {
   audioSrc?: string
   htmlAudioElement?: HTMLAudioElement
