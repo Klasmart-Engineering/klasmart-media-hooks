@@ -1,5 +1,8 @@
-import React from "react";
-import { AudioMetadataHookInput, useAudioMetadata } from "../../hooks/useAudioMetadata";
+import React from 'react'
+import {
+  AudioMetadataHookInput,
+  useAudioMetadata,
+} from '../../hooks/useAudioMetadata'
 
 export const AudioMetadataList = ({
   userId,
@@ -12,12 +15,12 @@ export const AudioMetadataList = ({
     roomId,
     h5pId,
     h5pSubId,
-  });
+  })
   if (error) {
-    return <p>error: {JSON.stringify(error, null, 2)}</p>;
+    return <p>error: {JSON.stringify(error, null, 2)}</p>
   }
-  if (loading) return <p>Loading ...</p>;
-  return <h1>Audio ID: {audioMetadata?.[0]?.id ?? "none"}!</h1>;
-};
+  if (loading) return <p>Loading ...</p>
+  return <h1>Audio ID: {audioMetadata?.[0]?.id ?? 'none'}!</h1>
+}
 
-export default AudioMetadataList;
+export default AudioMetadataList

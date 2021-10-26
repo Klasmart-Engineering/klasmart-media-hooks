@@ -40,8 +40,6 @@ export const useAudioMetadata = ({
   return { loading, error, audioMetadata: data.audioMetadata || [] }
 }
 
-
-
 const GET_AUDIO_METADATA = gql`
   query audioMetadata(
     $userId: String!
@@ -61,6 +59,7 @@ const GET_AUDIO_METADATA = gql`
       h5pId
       h5pSubId
       description
+      mimeType
       creationDate
     }
   }

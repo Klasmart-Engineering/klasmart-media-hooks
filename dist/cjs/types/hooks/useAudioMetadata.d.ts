@@ -8,9 +8,11 @@ export interface AudioMetadataHookInput {
 interface AudioMetadataItem {
     id: string;
     userId: string;
-    roomId: string;
+    roomId?: string;
     h5pId: string;
     h5pSubId?: string;
+    description: string;
+    mimeType: string;
     creationDate: string | any;
 }
 interface AudioMetadataHookOutput {
