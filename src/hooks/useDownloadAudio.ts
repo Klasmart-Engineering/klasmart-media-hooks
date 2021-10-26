@@ -8,8 +8,6 @@ export interface AudioPlayerHookInput {
 }
 
 
-
-
 export interface AudioPlayerHookOutput {
   audioSrc?: string
   htmlAudioElement?: HTMLAudioElement
