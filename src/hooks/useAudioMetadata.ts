@@ -1,5 +1,28 @@
 import { gql, useQuery } from '@apollo/client'
 
+export interface AudioMetadataHookInput {
+  userId: string
+  roomId: string
+  h5pId: string
+  h5pSubId?: string
+}
+
+export interface AudioMetadataItem {
+  id: string
+  userId: string
+  roomId?: string
+  h5pId: string
+  h5pSubId?: string
+  description: string
+  creationDate: string | any
+}
+
+export interface AudioMetadataHookOutput {
+  loading: boolean
+  error?: any
+  audioMetadata?: AudioMetadataItem[]
+}
+
 export const useAudioMetadata = ({
   userId,
   roomId,
@@ -17,28 +40,7 @@ export const useAudioMetadata = ({
   return { loading, error, audioMetadata: data.audioMetadata || [] }
 }
 
-export interface AudioMetadataHookInput {
-  userId: string
-  roomId: string
-  h5pId: string
-  h5pSubId?: string
-}
 
-interface AudioMetadataItem {
-  id: string
-  userId: string
-  roomId?: string
-  h5pId: string
-  h5pSubId?: string
-  description: string
-  creationDate: string | any
-}
-
-interface AudioMetadataHookOutput {
-  loading: boolean
-  error?: any
-  audioMetadata?: AudioMetadataItem[]
-}
 
 const GET_AUDIO_METADATA = gql`
   query audioMetadata(

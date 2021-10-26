@@ -12,7 +12,8 @@
     "release": "standard-version",
     "prepare": "husky install",
     "format:check": "prettier --check \"{src,tests}/**/*.ts\" \"*.json\"",
-    "format": "prettier --write \"{src,tests}/**/*.ts\" \"*.json\""
+    "format": "prettier --write \"{src,tests}/**/*.ts\" \"*.json\"",
+    "pre-commit": "lint-staged"
   },
   "config": {
     "commitizen": {
@@ -35,6 +36,7 @@
     "commitizen": "^4.2.4",
     "husky": "^7.0.4",
     "inquirer": "^8.2.0",
+    "lint-staged": "^11.2.4",
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "rimraf": "^3.0.2",
@@ -49,5 +51,8 @@
   "peerDependencies": {
     "@apollo/client": "^3.4.10",
     "react": "^17.0.2"
+  },
+  "lint-staged": {
+    "*.json": "prettier --write"
   }
 }

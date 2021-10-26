@@ -2,6 +2,49 @@ import { gql, useQuery } from '@apollo/client'
 import { box } from 'tweetnacl'
 import { useState, useEffect } from 'react'
 
+export interface AudioPlayerHookInput {
+  audioId: string
+  mimeType: string
+}
+
+
+
+
+export interface AudioPlayerHookOutput {
+  audioSrc?: string
+  htmlAudioElement?: HTMLAudioElement
+  loading?: boolean
+  error?: string
+}
+
+const GET_REQUIRED_DOWNLOAD_INFO = gql`
+  query getRequiredDownloadInfo($audioId: String!) {
+    getRequiredDownloadInfo(audioId: $audioId) {
+      base64SymmetricKey
+      presignedUrl
+    }
+  }
+`
+
+export const decrypt = (
+  secretOrSharedKey: Uint8Array,
+  messageWithNonce: Uint8Array,
+): Uint8Array => {
+  const nonce = messageWithNonce.slice(0, box.nonceLength)
+  const message = messageWithNonce.slice(
+    box.nonceLength,
+    messageWithNonce.length,
+  )
+
+  const decrypted = box.open.after(message, nonce, secretOrSharedKey)
+
+  if (!decrypted) {
+    throw new Error('Could not decrypt message')
+  }
+
+  return decrypted
+}
+
 export const useDownloadAudio = ({
   audioId,
   mimeType,
@@ -59,44 +102,4 @@ export const useDownloadAudio = ({
   }
 
   return response
-}
-
-export interface AudioPlayerHookInput {
-  audioId: string
-  mimeType: string
-}
-
-interface AudioPlayerHookOutput {
-  audioSrc?: string
-  htmlAudioElement?: HTMLAudioElement
-  loading?: boolean
-  error?: string
-}
-
-const GET_REQUIRED_DOWNLOAD_INFO = gql`
-  query getRequiredDownloadInfo($audioId: String!) {
-    getRequiredDownloadInfo(audioId: $audioId) {
-      base64SymmetricKey
-      presignedUrl
-    }
-  }
-`
-
-export const decrypt = (
-  secretOrSharedKey: Uint8Array,
-  messageWithNonce: Uint8Array,
-): Uint8Array => {
-  const nonce = messageWithNonce.slice(0, box.nonceLength)
-  const message = messageWithNonce.slice(
-    box.nonceLength,
-    messageWithNonce.length,
-  )
-
-  const decrypted = box.open.after(message, nonce, secretOrSharedKey)
-
-  if (!decrypted) {
-    throw new Error('Could not decrypt message')
-  }
-
-  return decrypted
 }
