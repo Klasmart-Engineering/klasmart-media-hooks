@@ -1,5 +1,4 @@
 /// <reference types="react" />
-declare const useDownloadAudio: ({ audioId, mimeType, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
 interface AudioPlayerHookInput {
     audioId: string;
     mimeType: string;
@@ -10,8 +9,8 @@ interface AudioPlayerHookOutput {
     loading?: boolean;
     error?: string;
 }
+declare const useDownloadAudio: ({ audioId, mimeType, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
 
-declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
 interface AudioMetadataHookInput {
     userId: string;
     roomId: string;
@@ -33,9 +32,10 @@ interface AudioMetadataHookOutput {
     error?: any;
     audioMetadata?: AudioMetadataItem[];
 }
+declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
 
 declare const AudioPlayer: ({ audioId, mimeType }: AudioPlayerHookInput) => JSX.Element;
 
 declare const AudioMetadataList: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => JSX.Element;
 
-export { AudioMetadataList, AudioPlayer, useAudioMetadata, useDownloadAudio };
+export { AudioMetadataHookInput, AudioMetadataHookOutput, AudioMetadataItem, AudioMetadataList, AudioPlayer, AudioPlayerHookInput, AudioPlayerHookOutput, useAudioMetadata, useDownloadAudio };

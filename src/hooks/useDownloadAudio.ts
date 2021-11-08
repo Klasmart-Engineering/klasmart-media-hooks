@@ -14,34 +14,6 @@ export interface AudioPlayerHookOutput {
   error?: string
 }
 
-const GET_REQUIRED_DOWNLOAD_INFO = gql`
-  query getRequiredDownloadInfo($audioId: String!) {
-    getRequiredDownloadInfo(audioId: $audioId) {
-      base64SymmetricKey
-      presignedUrl
-    }
-  }
-`
-
-export const decrypt = (
-  secretOrSharedKey: Uint8Array,
-  messageWithNonce: Uint8Array,
-): Uint8Array => {
-  const nonce = messageWithNonce.slice(0, box.nonceLength)
-  const message = messageWithNonce.slice(
-    box.nonceLength,
-    messageWithNonce.length,
-  )
-
-  const decrypted = box.open.after(message, nonce, secretOrSharedKey)
-
-  if (!decrypted) {
-    throw new Error('Could not decrypt message')
-  }
-
-  return decrypted
-}
-
 export const useDownloadAudio = ({
   audioId,
   mimeType,
@@ -99,4 +71,32 @@ export const useDownloadAudio = ({
   }
 
   return response
+}
+
+const GET_REQUIRED_DOWNLOAD_INFO = gql`
+  query getRequiredDownloadInfo($audioId: String!) {
+    getRequiredDownloadInfo(audioId: $audioId) {
+      base64SymmetricKey
+      presignedUrl
+    }
+  }
+`
+
+const decrypt = (
+  secretOrSharedKey: Uint8Array,
+  messageWithNonce: Uint8Array,
+): Uint8Array => {
+  const nonce = messageWithNonce.slice(0, box.nonceLength)
+  const message = messageWithNonce.slice(
+    box.nonceLength,
+    messageWithNonce.length,
+  )
+
+  const decrypted = box.open.after(message, nonce, secretOrSharedKey)
+
+  if (!decrypted) {
+    throw new Error('Could not decrypt message')
+  }
+
+  return decrypted
 }

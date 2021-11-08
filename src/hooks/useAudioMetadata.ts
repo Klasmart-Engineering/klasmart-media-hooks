@@ -14,6 +14,7 @@ export interface AudioMetadataItem {
   h5pId: string
   h5pSubId?: string
   description: string
+  mimeType: string
   creationDate: string | any
 }
 
@@ -37,7 +38,7 @@ export const useAudioMetadata = ({
       h5pSubId: h5pSubId,
     },
   })
-  return { loading, error, audioMetadata: data.audioMetadata || [] }
+  return { loading, error, audioMetadata: data?.audioMetadata || [] }
 }
 
 const GET_AUDIO_METADATA = gql`
