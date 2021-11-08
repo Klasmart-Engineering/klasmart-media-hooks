@@ -1,8 +1,10 @@
+import { ApolloClient } from '@apollo/client';
 export interface AudioMetadataHookInput {
     userId: string;
     roomId: string;
     h5pId: string;
     h5pSubId?: string;
+    client?: ApolloClient<unknown>;
 }
 export interface AudioMetadataItem {
     id: string;
@@ -19,4 +21,4 @@ export interface AudioMetadataHookOutput {
     error?: any;
     audioMetadata?: AudioMetadataItem[];
 }
-export declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
+export declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => AudioMetadataHookOutput;

@@ -1,7 +1,10 @@
 /// <reference types="react" />
+import { ApolloClient } from '@apollo/client';
+
 interface AudioPlayerHookInput {
     audioId: string;
     mimeType: string;
+    client?: ApolloClient<unknown>;
 }
 interface AudioPlayerHookOutput {
     audioSrc?: string;
@@ -9,13 +12,14 @@ interface AudioPlayerHookOutput {
     loading?: boolean;
     error?: string;
 }
-declare const useDownloadAudio: ({ audioId, mimeType, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
+declare const useDownloadAudio: ({ audioId, mimeType, client, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
 
 interface AudioMetadataHookInput {
     userId: string;
     roomId: string;
     h5pId: string;
     h5pSubId?: string;
+    client?: ApolloClient<unknown>;
 }
 interface AudioMetadataItem {
     id: string;
@@ -32,7 +36,7 @@ interface AudioMetadataHookOutput {
     error?: any;
     audioMetadata?: AudioMetadataItem[];
 }
-declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
+declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
 
 declare const AudioPlayer: ({ audioId, mimeType }: AudioPlayerHookInput) => JSX.Element;
 

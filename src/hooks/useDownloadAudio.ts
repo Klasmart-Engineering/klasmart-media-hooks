@@ -1,10 +1,11 @@
-import { gql, useQuery } from '@apollo/client'
+import { ApolloClient, gql, useQuery } from '@apollo/client'
 import { box } from 'tweetnacl'
 import { useState, useEffect } from 'react'
 
 export interface AudioPlayerHookInput {
   audioId: string
   mimeType: string
+  client?: ApolloClient<unknown>
 }
 
 export interface AudioPlayerHookOutput {
@@ -17,6 +18,7 @@ export interface AudioPlayerHookOutput {
 export const useDownloadAudio = ({
   audioId,
   mimeType,
+  client,
 }: AudioPlayerHookInput): AudioPlayerHookOutput => {
   const [response, setReponse] = useState<AudioPlayerHookOutput>({
     loading: true,
@@ -24,6 +26,7 @@ export const useDownloadAudio = ({
 
   const { loading, error, data } = useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
     variables: { audioId },
+    client: client,
   })
 
   useEffect(() => {
