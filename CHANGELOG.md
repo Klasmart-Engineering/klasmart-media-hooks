@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.0...v0.1.1) (2021-11-08)
+
+
+### Features
+
+* support passing in an ApolloClient ([822b9db](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/822b9dbfff735b1b67c4213d0e8ed956b3ec1811))
+
+
+### Bug Fixes
+
+* useAudioMetadata undefined error ([9967153](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/99671530b99ef687157e873dd099e21fbbcdcd9d))
+
 ## 0.1.0 (2021-11-08)
 
 
