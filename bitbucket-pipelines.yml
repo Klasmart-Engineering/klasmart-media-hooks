@@ -5,4 +5,5 @@ pipelines:
           name: 'Conventional Commits check'
           image: node:lts
           script:
+            - npm i
             - /bin/bash commitlint-pipeline-check.sh
