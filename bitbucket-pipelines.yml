@@ -1,9 +1,36 @@
+definitions:
+  caches:
+    nodemodules: ./node_modules
+  steps:
+    - step: &npm-install
+        name: 'npm install'
+        image: node:16
+        script:
+          - export HUSKY=0
+          - npm ci
+        caches:
+          - nodemodules
+        artifacts:
+          - node_modules/**/*
+    - step: &version-bump
+        name: 'version bump'
+        image: node:16
+        script:
+          - npm run release
+          # This step will fail if 'master' branch write permissions isn't set to "everyone".
+          - git push --follow-tags origin master
+
 pipelines:
   pull-requests:
     '**': # This runs as default for any branch not elsewhere defined.:
+      - step: *npm-install
       - step:
           name: 'Conventional Commits check'
-          image: node:lts
+          image: node:16
           script:
-            - npm i
             - /bin/bash commitlint-pipeline-check.sh
+
+  branches:
+    master:
+      - step: *npm-install
+      - step: *version-bump
