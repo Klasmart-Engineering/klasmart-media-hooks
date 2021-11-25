@@ -2,52 +2,52 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.1.1](https://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.0...v0.1.1) (2021-11-08)
+### [0.1.1](https://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.1..v0.1.0) (2021-11-08)
 
 
 ### Features
 
-* support passing in an ApolloClient ([822b9db](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/822b9dbfff735b1b67c4213d0e8ed956b3ec1811))
+* support passing in an ApolloClient ([822b9db](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/822b9dbfff735b1b67c4213d0e8ed956b3ec1811))
 
 
 ### Bug Fixes
 
-* useAudioMetadata undefined error ([9967153](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/99671530b99ef687157e873dd099e21fbbcdcd9d))
+* useAudioMetadata undefined error ([9967153](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/99671530b99ef687157e873dd099e21fbbcdcd9d))
 
 ## 0.1.0 (2021-11-08)
 
 
 ### Features
 
-* add getAudioMetadata query ([6bd43c5](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/6bd43c5b041ba898128adcb95df568006f550e44))
-* add metadata description field ([820236b](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/820236b34e19a1e7a939b871046b4c68f6b8fefa))
-* add useAudioMetadata without demo ([267df87](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/267df87644466cfc09a2ff79c40b1ab38e9c4280))
-* export audio download into hook + demo component ([81051c9](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/81051c931b1e87002c6817a62cbcd0958df6b32a))
-* expose mimeType in the metadata ([57d47d3](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/57d47d35f627f54f3110f1e6ff525ed8701fef1f))
-* move useDownloadAudio hook into ./hooks ([687d740](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/687d740381007546d78fdd5f0a116d8f1c4cdc2c))
-* use proxy ([859e564](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/859e5647467244c7b6ab21408f07932f258f839c))
+* add getAudioMetadata query ([6bd43c5](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/6bd43c5b041ba898128adcb95df568006f550e44))
+* add metadata description field ([820236b](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/820236b34e19a1e7a939b871046b4c68f6b8fefa))
+* add useAudioMetadata without demo ([267df87](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/267df87644466cfc09a2ff79c40b1ab38e9c4280))
+* export audio download into hook + demo component ([81051c9](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/81051c931b1e87002c6817a62cbcd0958df6b32a))
+* expose mimeType in the metadata ([57d47d3](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/57d47d35f627f54f3110f1e6ff525ed8701fef1f))
+* move useDownloadAudio hook into ./hooks ([687d740](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/687d740381007546d78fdd5f0a116d8f1c4cdc2c))
+* use proxy ([859e564](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/859e5647467244c7b6ab21408f07932f258f839c))
 
 
 ### Bug Fixes
 
-* add mime type to AudioPlayer ([be1d045](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/be1d0457e16b5bfed84097c0a50fa18451fc3219))
-* set @apollo/client as a peer dependency ([149a9d8](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/149a9d82c69cad7ca38bb4ad3cbf191d142a4a68))
+* add mime type to AudioPlayer ([be1d045](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/be1d0457e16b5bfed84097c0a50fa18451fc3219))
+* set @apollo/client as a peer dependency ([149a9d8](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/149a9d82c69cad7ca38bb4ad3cbf191d142a4a68))
 
 
 ### Refactor
 
-* change hook extensions from tsx to ts ([c966a81](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/c966a817c982c7ef5f85d5ebb329ca22cb978a44))
-* export typescript types explicitly ([233b61c](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/233b61cf14edc54e3395a75497289dbfa3320acd))
-* extract logic into files ([ab85582](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/ab855823b70e1e8497d1174a53dec0782cabbefa))
-* merge ([4f11c85](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/4f11c851e4d04cd5c3de2f44dde282aa1995a903))
-* remove outdated code ([4ffe877](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/4ffe87732ac8806f53bd29d657fd828d3ef3d5c8))
-* rename components to something more fitting ([10a42d4](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/10a42d4ccea3fe52625ab532ed0c40131d214e7f))
-* strip project down and organize ([a866a75](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/a866a758585245d7e63d054499803a073cc3b8a5))
+* change hook extensions from tsx to ts ([c966a81](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/c966a817c982c7ef5f85d5ebb329ca22cb978a44))
+* export typescript types explicitly ([233b61c](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/233b61cf14edc54e3395a75497289dbfa3320acd))
+* extract logic into files ([ab85582](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/ab855823b70e1e8497d1174a53dec0782cabbefa))
+* merge ([4f11c85](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/4f11c851e4d04cd5c3de2f44dde282aa1995a903))
+* remove outdated code ([4ffe877](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/4ffe87732ac8806f53bd29d657fd828d3ef3d5c8))
+* rename components to something more fitting ([10a42d4](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/10a42d4ccea3fe52625ab532ed0c40131d214e7f))
+* strip project down and organize ([a866a75](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/a866a758585245d7e63d054499803a073cc3b8a5))
 
 
 ### Build Changes
 
-* delete dist before packaging ([ca7b76f](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/ca7b76f6b01d45b45096f94d80be298c389b9cb7))
-* make husky files executable ([d14d176](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/d14d176b8cd4a7eab807bea54d3bd4ef4a6b4ed5))
-* rollup configuration and build ([6b9e11c](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/6b9e11c2a31e0424bca057fcd1d344eabad1f278))
-* update node version from 14 to 16 ([cecf1c9](https://bitbucket.org/calmisland/kidsloop-audio-player/commit/cecf1c9cc5366269ad9c53d72a150755a81ae48f))
+* delete dist before packaging ([ca7b76f](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/ca7b76f6b01d45b45096f94d80be298c389b9cb7))
+* make husky files executable ([d14d176](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/d14d176b8cd4a7eab807bea54d3bd4ef4a6b4ed5))
+* rollup configuration and build ([6b9e11c](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/6b9e11c2a31e0424bca057fcd1d344eabad1f278))
+* update node version from 14 to 16 ([cecf1c9](https://bitbucket.org/calmisland/kidsloop-audio-player/commits/cecf1c9cc5366269ad9c53d72a150755a81ae48f))
