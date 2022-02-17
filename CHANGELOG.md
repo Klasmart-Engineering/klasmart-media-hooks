@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.3..v0.1.2) (2022-02-17)
+
+
+### Features
+
+* add required parameter to download hook ([40afdb3](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/40afdb3f516a429abec773eb50757a9b67ae6651))
+
 ### [0.1.2](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.2..v0.1.1) (2021-11-25)
 
 ### [0.1.1](https://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.1..v0.1.0) (2021-11-08)
