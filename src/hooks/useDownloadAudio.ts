@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 
 export interface AudioPlayerHookInput {
   audioId: string
+  roomId: string
   mimeType: string
   client?: ApolloClient<unknown>
 }
@@ -17,6 +18,7 @@ export interface AudioPlayerHookOutput {
 
 export const useDownloadAudio = ({
   audioId,
+  roomId,
   mimeType,
   client,
 }: AudioPlayerHookInput): AudioPlayerHookOutput => {
@@ -25,7 +27,7 @@ export const useDownloadAudio = ({
   })
 
   const { loading, error, data } = useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
-    variables: { audioId },
+    variables: { audioId, roomId },
     client: client,
   })
 
@@ -77,8 +79,8 @@ export const useDownloadAudio = ({
 }
 
 const GET_REQUIRED_DOWNLOAD_INFO = gql`
-  query getRequiredDownloadInfo($audioId: String!) {
-    getRequiredDownloadInfo(audioId: $audioId) {
+  query getRequiredDownloadInfo($audioId: String!, roomId: String!) {
+    getRequiredDownloadInfo(audioId: $audioId, roomId: $roomId) {
       base64SymmetricKey
       presignedUrl
     }

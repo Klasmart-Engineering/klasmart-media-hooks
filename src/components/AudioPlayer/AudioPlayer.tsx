@@ -4,13 +4,18 @@ import {
   useDownloadAudio,
 } from '../../hooks/useDownloadAudio'
 
-export const AudioPlayer = ({ audioId, mimeType }: AudioPlayerHookInput) => {
+export const AudioPlayer = ({
+  audioId,
+  roomId,
+  mimeType,
+}: AudioPlayerHookInput) => {
   const { loading, error, audioSrc } = useDownloadAudio({
     audioId,
+    roomId,
     mimeType,
   })
 
-  if (loading) return <p>Loading ...</p>
+  if (loading) return <p>Loading...</p>
   if (error) {
     return <p>error: {JSON.stringify(error, null, 2)}</p>
   }
