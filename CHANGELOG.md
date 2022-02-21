@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.4..v0.1.3) (2022-02-21)
+
+
+### Bug Fixes
+
+* graphql syntax error ([153c452](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/153c45287113c7d9d386982cb78b6cb1bb1568b4))
+
 ### [0.1.3](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.3..v0.1.2) (2022-02-17)
 
 
