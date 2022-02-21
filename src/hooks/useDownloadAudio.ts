@@ -38,7 +38,11 @@ export const useDownloadAudio = ({
           method: 'GET',
           credentials: 'include',
         })
-        console.log('response', response.status)
+        if (!response.ok) {
+          const error = `(${response.status}) ${response.statusText}`
+          setReponse({ loading: false, error: error })
+          return
+        }
         const base64SymmetricKey =
           data.getRequiredDownloadInfo.base64SymmetricKey
         console.log('base64SymmetricKey', base64SymmetricKey)
