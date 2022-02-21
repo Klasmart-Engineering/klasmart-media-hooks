@@ -39,7 +39,7 @@ interface AudioMetadataHookOutput {
 }
 declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
 
-declare const AudioPlayer: ({ audioId, roomId, mimeType }: AudioPlayerHookInput) => JSX.Element;
+declare const AudioPlayer: ({ audioId, roomId, mimeType, }: AudioPlayerHookInput) => JSX.Element;
 
 declare const AudioMetadataList: ({ userId, roomId, h5pId, h5pSubId, }: AudioMetadataHookInput) => JSX.Element;
 

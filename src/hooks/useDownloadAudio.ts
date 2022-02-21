@@ -79,7 +79,7 @@ export const useDownloadAudio = ({
 }
 
 const GET_REQUIRED_DOWNLOAD_INFO = gql`
-  query getRequiredDownloadInfo($audioId: String!, roomId: String!) {
+  query getRequiredDownloadInfo($audioId: String!, $roomId: String!) {
     getRequiredDownloadInfo(audioId: $audioId, roomId: $roomId) {
       base64SymmetricKey
       presignedUrl
