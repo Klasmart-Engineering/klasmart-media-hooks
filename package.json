@@ -8,7 +8,7 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "package": "rimraf dist && rollup -c",
+    "build": "rimraf dist && rollup -c",
     "release": "standard-version",
     "prepare": "husky install",
     "format:check": "prettier --check \"{src,tests}/**/*.{ts,tsx}\" \"*.json\"",

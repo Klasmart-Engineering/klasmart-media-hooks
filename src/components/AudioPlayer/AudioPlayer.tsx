@@ -8,11 +8,13 @@ export const AudioPlayer = ({
   audioId,
   roomId,
   mimeType,
+  client,
 }: AudioPlayerHookInput) => {
   const { loading, error, audioSrc } = useDownloadAudio({
     audioId,
     roomId,
     mimeType,
+    client,
   })
 
   if (loading) return <p>Loading...</p>

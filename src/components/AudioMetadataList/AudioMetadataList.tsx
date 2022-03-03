@@ -9,12 +9,14 @@ export const AudioMetadataList = ({
   roomId,
   h5pId,
   h5pSubId,
+  client,
 }: AudioMetadataHookInput) => {
   const { loading, error, audioMetadata } = useAudioMetadata({
     userId,
     roomId,
     h5pId,
     h5pSubId,
+    client,
   })
   if (error) {
     return <p>error: {JSON.stringify(error, null, 2)}</p>
