@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.5..v0.1.4) (2022-03-03)
+
+
+### Features
+
+* add client parameter to components ([ab87ea8](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/ab87ea8cdece96d28264e25d0d2a131c7201b147))
+
+
+### Refactor
+
+* forward failed fetch response to React error ([0b37226](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/0b372267a6dceb6b2829e1c9886c1ff37bcac037))
+
 ### [0.1.4](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.4..v0.1.3) (2022-02-21)
 
 
