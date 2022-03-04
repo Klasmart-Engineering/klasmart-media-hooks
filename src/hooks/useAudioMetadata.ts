@@ -16,7 +16,7 @@ export interface AudioMetadataItem {
   h5pSubId?: string
   description: string
   mimeType: string
-  creationDate: string | any
+  createdAt: string | any
 }
 
 export interface AudioMetadataHookOutput {
@@ -64,7 +64,7 @@ const GET_AUDIO_METADATA = gql`
       h5pSubId
       description
       mimeType
-      creationDate
+      createdAt
     }
   }
 `

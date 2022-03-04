@@ -14,7 +14,7 @@ export interface AudioMetadataItem {
     h5pSubId?: string;
     description: string;
     mimeType: string;
-    creationDate: string | any;
+    createdAt: string | any;
 }
 export interface AudioMetadataHookOutput {
     loading: boolean;

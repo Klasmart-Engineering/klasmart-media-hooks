@@ -30,7 +30,7 @@ interface AudioMetadataItem {
     h5pSubId?: string;
     description: string;
     mimeType: string;
-    creationDate: string | any;
+    createdAt: string | any;
 }
 interface AudioMetadataHookOutput {
     loading: boolean;
