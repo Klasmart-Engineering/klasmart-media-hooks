@@ -44,17 +44,12 @@ export const useDownloadAudio = ({
         }
         const base64SymmetricKey =
           data.getRequiredDownloadInfo.base64SymmetricKey
-        console.log('base64SymmetricKey', base64SymmetricKey)
         const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
-        console.log('symmetricKey')
         const encryptedAudioArrayBuffer = await response.arrayBuffer()
         const encryptedAudio = new Uint8Array(encryptedAudioArrayBuffer)
-        console.log('encryptedAudio')
         const decryptedAudio = decrypt(symmetricKey, encryptedAudio)
-        console.log('decryptedAudio')
         const blob = new Blob([decryptedAudio], { type: mimeType })
         const audioUrl = URL.createObjectURL(blob)
-        console.log('audioUrl', audioUrl)
         setReponse({ loading: false, audioSrc: audioUrl })
       } catch (e) {
         console.error(e)
