@@ -9,7 +9,6 @@ interface AudioPlayerHookInput {
 }
 interface AudioPlayerHookOutput {
     audioSrc?: string;
-    htmlAudioElement?: HTMLAudioElement;
     loading?: boolean;
     error?: string;
 }

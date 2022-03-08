@@ -11,7 +11,6 @@ export interface AudioPlayerHookInput {
 
 export interface AudioPlayerHookOutput {
   audioSrc?: string
-  htmlAudioElement?: HTMLAudioElement
   loading?: boolean
   error?: string
 }
