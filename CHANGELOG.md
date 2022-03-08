@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.7..v0.1.6) (2022-03-08)
+
+
+### Refactor
+
+* remove debug logs ([91de673](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/91de673051b558de546c0584d5215c88a35ad004))
+* remove unused AudioPlayerHookOutput property ([0ecdafa](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/0ecdafa0c406d995aa43b890d36c074c5ff6e079))
+
 ### [0.1.6](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.6..v0.1.5) (2022-03-04)
 
 
