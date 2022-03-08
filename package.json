@@ -49,8 +49,8 @@
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "@apollo/client": "^3.4.10",
-    "react": "^17.0.2"
+    "@apollo/client": "3 - 4",
+    "react": "16 - 18"
   },
   "lint-staged": {
     "*.json": "prettier --write",
