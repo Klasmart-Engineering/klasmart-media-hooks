@@ -1,12 +1,12 @@
 import { ApolloClient } from '@apollo/client';
-export interface AudioMetadataHookInput {
+export interface MediaMetadataHookInput {
     userId: string;
     roomId: string;
     h5pId: string;
     h5pSubId?: string;
     client?: ApolloClient<unknown>;
 }
-export interface AudioMetadataItem {
+export interface MediaMetadataItem {
     id: string;
     userId: string;
     roomId?: string;
@@ -16,9 +16,9 @@ export interface AudioMetadataItem {
     mimeType: string;
     createdAt: string | any;
 }
-export interface AudioMetadataHookOutput {
+export interface MediaMetadataHookOutput {
     loading: boolean;
     error?: any;
-    audioMetadata?: AudioMetadataItem[];
+    mediaMetadata?: MediaMetadataItem[];
 }
-export declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
+export declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: MediaMetadataHookInput) => MediaMetadataHookOutput;

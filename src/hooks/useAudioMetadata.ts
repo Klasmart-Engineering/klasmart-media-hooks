@@ -1,6 +1,6 @@
 import { ApolloClient, gql, useQuery } from '@apollo/client'
 
-export interface AudioMetadataHookInput {
+export interface MediaMetadataHookInput {
   userId: string
   roomId: string
   h5pId: string
@@ -8,7 +8,7 @@ export interface AudioMetadataHookInput {
   client?: ApolloClient<unknown>
 }
 
-export interface AudioMetadataItem {
+export interface MediaMetadataItem {
   id: string
   userId: string
   roomId?: string
@@ -19,10 +19,10 @@ export interface AudioMetadataItem {
   createdAt: string | any
 }
 
-export interface AudioMetadataHookOutput {
+export interface MediaMetadataHookOutput {
   loading: boolean
   error?: any
-  audioMetadata?: AudioMetadataItem[]
+  mediaMetadata?: MediaMetadataItem[]
 }
 
 export const useAudioMetadata = ({
@@ -31,7 +31,7 @@ export const useAudioMetadata = ({
   h5pId,
   h5pSubId,
   client,
-}: AudioMetadataHookInput): AudioMetadataHookOutput => {
+}: MediaMetadataHookInput): MediaMetadataHookOutput => {
   const { loading, error, data } = useQuery(GET_AUDIO_METADATA, {
     variables: {
       userId: userId,
@@ -41,7 +41,7 @@ export const useAudioMetadata = ({
     },
     client: client,
   })
-  return { loading, error, audioMetadata: data?.audioMetadata || [] }
+  return { loading, error, mediaMetadata: data?.audioMetadata || [] }
 }
 
 const GET_AUDIO_METADATA = gql`

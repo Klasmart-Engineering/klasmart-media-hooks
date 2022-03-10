@@ -2,36 +2,36 @@ import { ApolloClient, gql, useQuery } from '@apollo/client'
 import { box } from 'tweetnacl'
 import { useState, useEffect } from 'react'
 
-export interface AudioPlayerHookInput {
-  audioId: string
+export interface DownloadMediaHookInput {
+  mediaId: string
   roomId: string
   mimeType: string
   client?: ApolloClient<unknown>
 }
 
-export interface AudioPlayerHookOutput {
-  audioSrc?: string
+export interface DownloadMediaHookOutput {
+  src?: string
   loading?: boolean
   error?: string
 }
 
-export const useDownloadAudio = ({
-  audioId,
+export const useDownloadMedia = ({
+  mediaId,
   roomId,
   mimeType,
   client,
-}: AudioPlayerHookInput): AudioPlayerHookOutput => {
-  const [response, setReponse] = useState<AudioPlayerHookOutput>({
+}: DownloadMediaHookInput): DownloadMediaHookOutput => {
+  const [response, setReponse] = useState<DownloadMediaHookOutput>({
     loading: true,
   })
 
   const { loading, error, data } = useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
-    variables: { audioId, roomId },
+    variables: { mediaId, roomId },
     client: client,
   })
 
   useEffect(() => {
-    const downloadAudio = async (presignedUrl: string) => {
+    const downloadMedia = async (presignedUrl: string) => {
       try {
         const response = await fetch(presignedUrl, {
           method: 'GET',
@@ -45,12 +45,12 @@ export const useDownloadAudio = ({
         const base64SymmetricKey =
           data.getRequiredDownloadInfo.base64SymmetricKey
         const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
-        const encryptedAudioArrayBuffer = await response.arrayBuffer()
-        const encryptedAudio = new Uint8Array(encryptedAudioArrayBuffer)
-        const decryptedAudio = decrypt(symmetricKey, encryptedAudio)
-        const blob = new Blob([decryptedAudio], { type: mimeType })
-        const audioUrl = URL.createObjectURL(blob)
-        setReponse({ loading: false, audioSrc: audioUrl })
+        const encryptedMediaArrayBuffer = await response.arrayBuffer()
+        const encryptedMedia = new Uint8Array(encryptedMediaArrayBuffer)
+        const decryptedMedia = decrypt(symmetricKey, encryptedMedia)
+        const blob = new Blob([decryptedMedia], { type: mimeType })
+        const mediaUrl = URL.createObjectURL(blob)
+        setReponse({ loading: false, src: mediaUrl })
       } catch (e) {
         console.error(e)
         setReponse({ loading: false, error: JSON.stringify(e) })
@@ -62,7 +62,7 @@ export const useDownloadAudio = ({
       error === undefined &&
       data?.getRequiredDownloadInfo?.presignedUrl !== undefined
     ) {
-      downloadAudio(data.getRequiredDownloadInfo.presignedUrl)
+      downloadMedia(data.getRequiredDownloadInfo.presignedUrl)
     }
   }, [data, loading, error])
 
@@ -77,8 +77,8 @@ export const useDownloadAudio = ({
 }
 
 const GET_REQUIRED_DOWNLOAD_INFO = gql`
-  query getRequiredDownloadInfo($audioId: String!, $roomId: String!) {
-    getRequiredDownloadInfo(audioId: $audioId, roomId: $roomId) {
+  query getRequiredDownloadInfo($mediaId: String!, $roomId: String!) {
+    getRequiredDownloadInfo(mediaId: $mediaId, roomId: $roomId) {
       base64SymmetricKey
       presignedUrl
     }

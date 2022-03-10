@@ -1,11 +1,11 @@
 export {
-  useDownloadAudio,
-  AudioPlayerHookInput,
-  AudioPlayerHookOutput,
-} from './useDownloadAudio'
+  useDownloadMedia,
+  DownloadMediaHookInput,
+  DownloadMediaHookOutput,
+} from './useDownloadMedia'
 export {
   useAudioMetadata,
-  AudioMetadataHookInput,
-  AudioMetadataItem,
-  AudioMetadataHookOutput,
+  MediaMetadataHookInput,
+  MediaMetadataItem,
+  MediaMetadataHookOutput,
 } from './useAudioMetadata'

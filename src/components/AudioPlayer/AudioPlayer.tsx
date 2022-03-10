@@ -1,17 +1,17 @@
 import React from 'react'
 import {
-  AudioPlayerHookInput,
-  useDownloadAudio,
-} from '../../hooks/useDownloadAudio'
+  DownloadMediaHookInput,
+  useDownloadMedia,
+} from '../../hooks/useDownloadMedia'
 
 export const AudioPlayer = ({
-  audioId,
+  mediaId,
   roomId,
   mimeType,
   client,
-}: AudioPlayerHookInput) => {
-  const { loading, error, audioSrc } = useDownloadAudio({
-    audioId,
+}: DownloadMediaHookInput) => {
+  const { loading, error, src } = useDownloadMedia({
+    mediaId,
     roomId,
     mimeType,
     client,
@@ -23,7 +23,7 @@ export const AudioPlayer = ({
   }
   return (
     <div>
-      <audio src={audioSrc} controls controlsList="nodownload" />
+      <audio src={src} controls controlsList="nodownload" />
     </div>
   )
 }

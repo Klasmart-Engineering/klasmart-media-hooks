@@ -1,2 +1,2 @@
-export { useDownloadAudio, AudioPlayerHookInput, AudioPlayerHookOutput, } from './useDownloadAudio';
-export { useAudioMetadata, AudioMetadataHookInput, AudioMetadataItem, AudioMetadataHookOutput, } from './useAudioMetadata';
+export { useDownloadMedia, DownloadMediaHookInput, DownloadMediaHookOutput, } from './useDownloadMedia';
+export { useAudioMetadata, MediaMetadataHookInput, MediaMetadataItem, MediaMetadataHookOutput, } from './useAudioMetadata';

@@ -1,27 +1,27 @@
 /// <reference types="react" />
 import { ApolloClient } from '@apollo/client';
 
-interface AudioPlayerHookInput {
-    audioId: string;
+interface DownloadMediaHookInput {
+    mediaId: string;
     roomId: string;
     mimeType: string;
     client?: ApolloClient<unknown>;
 }
-interface AudioPlayerHookOutput {
-    audioSrc?: string;
+interface DownloadMediaHookOutput {
+    src?: string;
     loading?: boolean;
     error?: string;
 }
-declare const useDownloadAudio: ({ audioId, roomId, mimeType, client, }: AudioPlayerHookInput) => AudioPlayerHookOutput;
+declare const useDownloadMedia: ({ mediaId, roomId, mimeType, client, }: DownloadMediaHookInput) => DownloadMediaHookOutput;
 
-interface AudioMetadataHookInput {
+interface MediaMetadataHookInput {
     userId: string;
     roomId: string;
     h5pId: string;
     h5pSubId?: string;
     client?: ApolloClient<unknown>;
 }
-interface AudioMetadataItem {
+interface MediaMetadataItem {
     id: string;
     userId: string;
     roomId?: string;
@@ -31,15 +31,15 @@ interface AudioMetadataItem {
     mimeType: string;
     createdAt: string | any;
 }
-interface AudioMetadataHookOutput {
+interface MediaMetadataHookOutput {
     loading: boolean;
     error?: any;
-    audioMetadata?: AudioMetadataItem[];
+    mediaMetadata?: MediaMetadataItem[];
 }
-declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => AudioMetadataHookOutput;
+declare const useAudioMetadata: ({ userId, roomId, h5pId, h5pSubId, client, }: MediaMetadataHookInput) => MediaMetadataHookOutput;
 
-declare const AudioPlayer: ({ audioId, roomId, mimeType, client, }: AudioPlayerHookInput) => JSX.Element;
+declare const AudioPlayer: ({ mediaId, roomId, mimeType, client, }: DownloadMediaHookInput) => JSX.Element;
 
-declare const AudioMetadataList: ({ userId, roomId, h5pId, h5pSubId, client, }: AudioMetadataHookInput) => JSX.Element;
+declare const AudioMetadataList: ({ userId, roomId, h5pId, h5pSubId, client, }: MediaMetadataHookInput) => JSX.Element;
 
-export { AudioMetadataHookInput, AudioMetadataHookOutput, AudioMetadataItem, AudioMetadataList, AudioPlayer, AudioPlayerHookInput, AudioPlayerHookOutput, useAudioMetadata, useDownloadAudio };
+export { AudioMetadataList, AudioPlayer, DownloadMediaHookInput, DownloadMediaHookOutput, MediaMetadataHookInput, MediaMetadataHookOutput, MediaMetadataItem, useAudioMetadata, useDownloadMedia };
