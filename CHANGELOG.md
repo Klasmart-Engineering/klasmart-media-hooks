@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.2.0..v0.1.7) (2022-03-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* generalize by renaming audio to media
+
+### Features
+
+* generalize by renaming audio to media ([635a738](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/635a738ac74744a4095d3267277a0c4a848d1286))
+* rename package to kidsloop-media-ui ([76adaf8](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/76adaf8edb527f6034be4cb0171715462bcf0a7b))
+
 ### [0.1.7](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.1.7..v0.1.6) (2022-03-08)
 
 
