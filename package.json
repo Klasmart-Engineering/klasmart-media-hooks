@@ -1,5 +1,5 @@
 {
-  "name": "kidsloop-audio-player",
+  "name": "kidsloop-media-ui",
   "version": "0.1.7",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
