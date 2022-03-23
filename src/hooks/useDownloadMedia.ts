@@ -32,27 +32,49 @@ export const useDownloadMedia = ({
 
   useEffect(() => {
     const downloadMedia = async (presignedUrl: string) => {
+      console.log(`[useDownloadMedia] starting presignedUrl download...`)
       try {
         const response = await fetch(presignedUrl, {
           method: 'GET',
           credentials: 'include',
         })
         if (!response.ok) {
+          try {
+            const errorBody = await response.text()
+            console.log(
+              `[useDownloadMedia] presignedUrl download failed. response: ${errorBody}`,
+            )
+          } catch (err) {
+            // Ignore
+          }
           const error = `(${response.status}) ${response.statusText}`
+          console.log(
+            `[useDownloadMedia] presignedUrl download failed. status: ${error}`,
+          )
           setReponse({ loading: false, error: error })
           return
         }
+        const status = `(${response.status}) ${response.statusText}`
+        console.log(
+          `[useDownloadMedia] presignedUrl download successful. status: ${status}`,
+        )
         const base64SymmetricKey =
           data.getRequiredDownloadInfo.base64SymmetricKey
         const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
         const encryptedMediaArrayBuffer = await response.arrayBuffer()
         const encryptedMedia = new Uint8Array(encryptedMediaArrayBuffer)
         const decryptedMedia = decrypt(symmetricKey, encryptedMedia)
+        console.log(`[useDownloadMedia] media decrypted`)
         const blob = new Blob([decryptedMedia], { type: mimeType })
+        console.log(`[useDownloadMedia] blob created. mimeType: ${mimeType}`)
         const mediaUrl = URL.createObjectURL(blob)
+        console.log(`[useDownloadMedia] URL.createObjectURL(blob) called`)
         setReponse({ loading: false, src: mediaUrl })
+        console.log(
+          `[useDownloadMedia] setResponse called. mediaUrl: ${mediaUrl}`,
+        )
       } catch (e) {
-        console.error(e)
+        console.error(`[useDownloadMedia] an error occurred:`, e)
         setReponse({ loading: false, error: JSON.stringify(e) })
       }
     }
