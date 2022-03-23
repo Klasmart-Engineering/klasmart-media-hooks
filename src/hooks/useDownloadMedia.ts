@@ -67,8 +67,17 @@ export const useDownloadMedia = ({
         console.log(`[useDownloadMedia] media decrypted`)
         const blob = new Blob([decryptedMedia], { type: mimeType })
         console.log(`[useDownloadMedia] blob created. mimeType: ${mimeType}`)
-        const mediaUrl = URL.createObjectURL(blob)
-        console.log(`[useDownloadMedia] URL.createObjectURL(blob) called`)
+        let mediaUrl: string
+        if (window.webkitURL) {
+          mediaUrl = window.webkitURL.createObjectURL(blob)
+          console.log(`[useDownloadMedia] using webkitURL.createObjectURL`)
+        } else if (window.URL?.createObjectURL) {
+          console.log(`[useDownloadMedia] using URL.createObjectURL`)
+          mediaUrl = window.URL.createObjectURL(blob)
+        } else {
+          throw new Error('No valid createObjectURL available.')
+        }
+        //console.log(`[useDownloadMedia] createObjectURL(blob) called`)
         setReponse({ loading: false, src: mediaUrl })
         console.log(
           `[useDownloadMedia] setResponse called. mediaUrl: ${mediaUrl}`,
