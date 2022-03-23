@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.2.1..v0.2.0) (2022-03-23)
+
+
+### Refactor
+
+* add logs for debugging ([a0d5676](http://bitbucket.org/calmisland/kidsloop-audio-player/commits/a0d567605a4c92a87248c3685107b1eb375fe75e))
+
 ## [0.2.0](http://bitbucket.org/calmisland/kidsloop-audio-player/compare/v0.2.0..v0.1.7) (2022-03-10)
 
 
