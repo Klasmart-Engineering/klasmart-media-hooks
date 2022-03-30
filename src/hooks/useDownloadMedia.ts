@@ -32,58 +32,27 @@ export const useDownloadMedia = ({
 
   useEffect(() => {
     const downloadMedia = async (presignedUrl: string) => {
-      console.log(`[useDownloadMedia] starting presignedUrl download...`)
       try {
         const response = await fetch(presignedUrl, {
           method: 'GET',
           credentials: 'include',
         })
         if (!response.ok) {
-          try {
-            const errorBody = await response.text()
-            console.log(
-              `[useDownloadMedia] presignedUrl download failed. response: ${errorBody}`,
-            )
-          } catch (err) {
-            // Ignore
-          }
           const error = `(${response.status}) ${response.statusText}`
-          console.log(
-            `[useDownloadMedia] presignedUrl download failed. status: ${error}`,
-          )
           setReponse({ loading: false, error: error })
           return
         }
-        const status = `(${response.status}) ${response.statusText}`
-        console.log(
-          `[useDownloadMedia] presignedUrl download successful. status: ${status}`,
-        )
         const base64SymmetricKey =
           data.getRequiredDownloadInfo.base64SymmetricKey
         const symmetricKey = Buffer.from(base64SymmetricKey, 'base64')
         const encryptedMediaArrayBuffer = await response.arrayBuffer()
         const encryptedMedia = new Uint8Array(encryptedMediaArrayBuffer)
         const decryptedMedia = decrypt(symmetricKey, encryptedMedia)
-        console.log(`[useDownloadMedia] media decrypted`)
         const blob = new Blob([decryptedMedia], { type: mimeType })
-        console.log(`[useDownloadMedia] blob created. mimeType: ${mimeType}`)
-        let mediaUrl: string
-        if (window.webkitURL) {
-          mediaUrl = window.webkitURL.createObjectURL(blob)
-          console.log(`[useDownloadMedia] using webkitURL.createObjectURL`)
-        } else if (window.URL?.createObjectURL) {
-          console.log(`[useDownloadMedia] using URL.createObjectURL`)
-          mediaUrl = window.URL.createObjectURL(blob)
-        } else {
-          throw new Error('No valid createObjectURL available.')
-        }
-        //console.log(`[useDownloadMedia] createObjectURL(blob) called`)
+        const mediaUrl = URL.createObjectURL(blob)
         setReponse({ loading: false, src: mediaUrl })
-        console.log(
-          `[useDownloadMedia] setResponse called. mediaUrl: ${mediaUrl}`,
-        )
       } catch (e) {
-        console.error(`[useDownloadMedia] an error occurred:`, e)
+        console.error(e)
         setReponse({ loading: false, error: JSON.stringify(e) })
       }
     }
