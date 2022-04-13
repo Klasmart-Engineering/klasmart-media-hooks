@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_as:
+        required: true
+        type: choice
+        default: auto
+        description: If you want an automated or a manual version bump
+        options:
+          - auto
+          - major
+          - minor
+          - patch
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm-ci:
+    uses: KL-Engineering/github-action-workflows/.github/workflows/npm-ci.yml@v2.1.0
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+  
+  create-release:
+    needs: [npm-ci]
+    uses: ./.github/workflows/job-create-release.yml
+    with:
+      release_as: ${{ github.event.inputs.release_as }}
+
+  npm-publish:
+    needs: [create-release]
+    uses: KL-Engineering/github-action-workflows/.github/workflows/npm-publish-build.yml@v2.1.0
+    secrets:
+      NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
