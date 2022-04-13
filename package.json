@@ -1,6 +1,10 @@
 {
-  "name": "kidsloop-media-ui",
+  "name": "@kl-engineering/kidsloop-media-hooks",
   "version": "0.2.2",
+  "repository": "git://github.com/kl-engineering/kidsloop-media-hooks.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
