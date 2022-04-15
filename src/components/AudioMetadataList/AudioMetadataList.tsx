@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-  MediaMetadataHookInput,
-  useAudioMetadata,
-} from '../../hooks/useAudioMetadata'
+import { MediaMetadataHookInput } from '../../hooks/sharedTypes'
+import { useAudioMetadata } from '../../hooks/useAudioMetadata'
 
 export const AudioMetadataList = ({
   userId,

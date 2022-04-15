@@ -1,14 +1,18 @@
 import { gql, useQuery } from '@apollo/client'
-import { MediaMetadataHookInput, MediaMetadataHookOutput } from './sharedTypes'
+import {
+  MediaMetadataHookInput,
+  MediaMetadataHookOutput,
+  MediaMetadataItem,
+} from './sharedTypes'
 
-export const useAudioMetadata = ({
+export const useImageMetadata = ({
   userId,
   roomId,
   h5pId,
   h5pSubId,
   client,
 }: MediaMetadataHookInput): MediaMetadataHookOutput => {
-  const { loading, error, data } = useQuery(GET_AUDIO_METADATA, {
+  const { loading, error, data } = useQuery(GET_IMAGE_METADATA, {
     variables: {
       userId: userId,
       roomId: roomId,
@@ -17,17 +21,17 @@ export const useAudioMetadata = ({
     },
     client: client,
   })
-  return { loading, error, mediaMetadata: data?.audioMetadata || [] }
+  return { loading, error, mediaMetadata: data?.imageMetadata || [] }
 }
 
-const GET_AUDIO_METADATA = gql`
-  query audioMetadata(
+const GET_IMAGE_METADATA = gql`
+  query imageMetadata(
     $userId: String!
     $roomId: String!
     $h5pId: String!
     $h5pSubId: String
   ) {
-    audioMetadata(
+    imageMetadata(
       userId: $userId
       roomId: $roomId
       h5pId: $h5pId

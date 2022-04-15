@@ -1,2 +1,4 @@
 export { useDownloadMedia, DownloadMediaHookInput, DownloadMediaHookOutput, } from './useDownloadMedia';
-export { useAudioMetadata, MediaMetadataHookInput, MediaMetadataItem, MediaMetadataHookOutput, } from './useAudioMetadata';
+export { useAudioMetadata, } from './useAudioMetadata';
+export { useImageMetadata, } from './useImageMetadata';
+export { MediaMetadataHookInput, MediaMetadataItem, MediaMetadataHookOutput, } from './sharedTypes';

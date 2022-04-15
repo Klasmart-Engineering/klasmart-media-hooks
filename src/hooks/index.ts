@@ -3,9 +3,10 @@ export {
   DownloadMediaHookInput,
   DownloadMediaHookOutput,
 } from './useDownloadMedia'
+export { useAudioMetadata } from './useAudioMetadata'
+export { useImageMetadata } from './useImageMetadata'
 export {
-  useAudioMetadata,
   MediaMetadataHookInput,
   MediaMetadataItem,
   MediaMetadataHookOutput,
-} from './useAudioMetadata'
+} from './sharedTypes'
