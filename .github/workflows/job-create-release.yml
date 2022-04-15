@@ -53,5 +53,6 @@ jobs:
 
       - name: Commit changes
         run: |
+          export VERSION_TAG=$(git describe --tags --abbrev=0)
           git push origin $VERSION_TAG
           git push origin main
