@@ -8,6 +8,9 @@ on:
         required: true
         type: string
         description: auto, major, minor, or patch
+    secrets:
+      NODE_AUTH_TOKEN:
+        required: true
 
 jobs:
   create-release:
@@ -42,5 +45,13 @@ jobs:
           else
             npm run release -- --release-as $RELEASE_AS
           fi
-          git push origin main
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+      - name: Commit changes
+        run: |
           git push origin $VERSION_TAG
+          git push origin main

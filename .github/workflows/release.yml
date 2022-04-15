@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   npm-ci:
-    uses: KL-Engineering/github-action-workflows/.github/workflows/npm-ci.yml@v2.1.0
+    uses: KL-Engineering/github-action-workflows/.github/workflows/npm-ci.yml@v3.1.0
     secrets:
       NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
   
@@ -29,9 +29,5 @@ jobs:
     uses: ./.github/workflows/job-create-release.yml
     with:
       release_as: ${{ github.event.inputs.release_as }}
-
-  npm-publish:
-    needs: [create-release]
-    uses: KL-Engineering/github-action-workflows/.github/workflows/npm-publish-build.yml@v2.1.0
     secrets:
-      NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
