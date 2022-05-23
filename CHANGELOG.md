@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.4 (2022-05-23)
+
+
+### Features
+
+* **DAS-362:** add new download hook ([87a6570](https://github.com/kl-engineering/kidsloop-media-hooks/commit/87a65704611bf31362a28caca251fbbbf5deaf8a))
+
 ### [0.2.3](https://github.com/KL-Engineering/kidsloop-media-hooks/compare/v0.2.2...v0.2.3) (2022-04-15)
 
 
