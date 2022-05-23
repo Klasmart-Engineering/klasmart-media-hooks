@@ -14,6 +14,22 @@ interface DownloadMediaHookOutput {
 }
 declare const useDownloadMedia: ({ mediaId, roomId, mimeType, client, }: DownloadMediaHookInput) => DownloadMediaHookOutput;
 
+interface DownloadMediaForMetadataHookInput {
+    userId: string;
+    roomId: string;
+    h5pId: string;
+    h5pSubId?: string;
+    mediaType?: 'audio' | 'image';
+    mimeType: string;
+    client?: ApolloClient<unknown>;
+}
+interface DownloadMediaForMetadataHookOutput {
+    src?: string;
+    loading?: boolean;
+    error?: string;
+}
+declare const useDownloadMediaForMetadata: ({ userId, roomId, h5pId, h5pSubId, mediaType, mimeType, client, }: DownloadMediaForMetadataHookInput) => DownloadMediaForMetadataHookOutput;
+
 interface MediaMetadataHookInput {
     userId: string;
     roomId: string;
@@ -45,4 +61,4 @@ declare const AudioPlayer: ({ mediaId, roomId, mimeType, client, }: DownloadMedi
 
 declare const AudioMetadataList: ({ userId, roomId, h5pId, h5pSubId, client, }: MediaMetadataHookInput) => JSX.Element;
 
-export { AudioMetadataList, AudioPlayer, DownloadMediaHookInput, DownloadMediaHookOutput, MediaMetadataHookInput, MediaMetadataHookOutput, MediaMetadataItem, useAudioMetadata, useDownloadMedia, useImageMetadata };
+export { AudioMetadataList, AudioPlayer, DownloadMediaForMetadataHookInput, DownloadMediaForMetadataHookOutput, DownloadMediaHookInput, DownloadMediaHookOutput, MediaMetadataHookInput, MediaMetadataHookOutput, MediaMetadataItem, useAudioMetadata, useDownloadMedia, useDownloadMediaForMetadata, useImageMetadata };

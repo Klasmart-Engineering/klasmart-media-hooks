@@ -3,6 +3,11 @@ export {
   DownloadMediaHookInput,
   DownloadMediaHookOutput,
 } from './useDownloadMedia'
+export {
+  useDownloadMediaForMetadata,
+  DownloadMediaForMetadataHookInput,
+  DownloadMediaForMetadataHookOutput,
+} from './useDownloadMediaForMetadata'
 export { useAudioMetadata } from './useAudioMetadata'
 export { useImageMetadata } from './useImageMetadata'
 export {
