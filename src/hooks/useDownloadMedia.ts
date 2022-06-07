@@ -28,6 +28,7 @@ export const useDownloadMedia = ({
   const { loading, error, data } = useQuery(GET_REQUIRED_DOWNLOAD_INFO, {
     variables: { mediaId, roomId },
     client: client,
+    fetchPolicy: 'no-cache',
   })
 
   useEffect(() => {

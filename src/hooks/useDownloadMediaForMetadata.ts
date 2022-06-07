@@ -7,7 +7,7 @@ export interface DownloadMediaForMetadataHookInput {
   roomId: string
   h5pId: string
   h5pSubId?: string
-  mediaType?: 'audio' | 'image'
+  mediaType: 'audio' | 'image'
   mimeType: string
   client?: ApolloClient<unknown>
 }
@@ -36,6 +36,7 @@ export const useDownloadMediaForMetadata = ({
     {
       variables: { userId, roomId, h5pId, h5pSubId, mediaType },
       client: client,
+      fetchPolicy: 'no-cache',
     },
   )
 
