@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.5 (2022-06-07)
+
+
+### Bug Fixes
+
+* failed downloads because of expired presigned urls ([7ef0dad](https://github.com/kl-engineering/kidsloop-media-hooks/commit/7ef0dad6162b021115e369b484572bdb07d2c1a3))
+
 ### 0.2.4 (2022-05-23)
 
 
