@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.6 (2022-06-09)
+
+
+### Bug Fixes
+
+* handle null return value case ([a5aefce](https://github.com/kl-engineering/kidsloop-media-hooks/commit/a5aefcecbc9e1150e2f1fb95637ce26058fb7d7e))
+
 ### 0.2.5 (2022-06-07)
 
 

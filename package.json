@@ -1,6 +1,6 @@
 {
   "name": "@kl-engineering/kidsloop-media-hooks",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "repository": "git://github.com/kl-engineering/kidsloop-media-hooks.git",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
