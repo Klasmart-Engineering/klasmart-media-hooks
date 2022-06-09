@@ -19,12 +19,12 @@ interface DownloadMediaForMetadataHookInput {
     roomId: string;
     h5pId: string;
     h5pSubId?: string;
-    mediaType?: 'audio' | 'image';
+    mediaType: 'audio' | 'image';
     mimeType: string;
     client?: ApolloClient<unknown>;
 }
 interface DownloadMediaForMetadataHookOutput {
-    src?: string;
+    src?: string | null;
     loading?: boolean;
     error?: string;
 }

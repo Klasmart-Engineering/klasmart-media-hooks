@@ -13,7 +13,7 @@ export interface DownloadMediaForMetadataHookInput {
 }
 
 export interface DownloadMediaForMetadataHookOutput {
-  src?: string
+  src?: string | null
   loading?: boolean
   error?: string
 }
@@ -67,11 +67,11 @@ export const useDownloadMediaForMetadata = ({
       }
     }
 
-    if (
-      loading === false &&
-      error === undefined &&
-      data?.getRequiredDownloadInfoForMetadata?.presignedUrl !== undefined
-    ) {
+    if (loading === false && error === undefined) {
+      if (data?.getRequiredDownloadInfoForMetadata == null) {
+        setReponse({ loading: false, src: null })
+        return
+      }
       downloadMedia(data.getRequiredDownloadInfoForMetadata.presignedUrl)
     }
   }, [data, loading, error])
