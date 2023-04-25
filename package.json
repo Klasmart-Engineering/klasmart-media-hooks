@@ -29,9 +29,9 @@
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.2.1",
+    "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^13.2.0",
-    "@commitlint/cz-commitlint": "^13.2.1",
+    "@commitlint/cz-commitlint": "^17.5.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@rollup/plugin-typescript": "^8.3.0",
